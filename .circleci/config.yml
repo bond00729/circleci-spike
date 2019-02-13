@@ -5,7 +5,6 @@ jobs:
       - image: bond00729/circleci-spike
     steps:
       - checkout
-      - run: cd project
       - run: yarn install
       - run: echo "Running tests..."
       - run: yarn test
