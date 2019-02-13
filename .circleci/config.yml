@@ -37,4 +37,4 @@ workflows:
       - first
       - second:
           requires:
-            - one
+            - first
