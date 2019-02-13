@@ -6,17 +6,35 @@ jobs:
     steps:
       - checkout
       - run: echo "Hello, world!"
-      - run: sleep 25
+      - run: mkdir -p first_workspace
+      - run: echo "Experimenting with workspaces" > first_workspace/echo-output
+      - persist_to_workspace:
+          # must be absolute path or the relative path from the working dir
+          root: first_workspace
+          # must be relative from root
+          paths:
+           - echo-output
   second:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
       - run: echo "hElLo, WoRlD"
-      - run: sleep 15
+      - attach_workspace:
+          # must be absolute path or the relative path from the working dir
+          at: first_workspace
+
+      - run: |
+          if [[ $(cat first_workspace/echo-output) == "Experimenting with workspaces" ]]; then
+            echo "ITS ALIVEEEEEEEEE";
+          else
+            echo "WROOOOOOOOOOOOOOONG LEVERRRRRRRRRRRRRR ahhhh"; exit 1
+          fi
 workflows:
   version: 2
   first&second:
     jobs:
       - first
-      - second
+      - second:
+          requires:
+            - one
