@@ -1,0 +1,17 @@
+{
+  "name": "circleci-spike",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bond00729/circleci-spike.git",
+  "author": "Matthew Bond <matthew.randal.bond@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "mocha 'src/**/*.spec.js'"
+  }
+}
